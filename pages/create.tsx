@@ -4,27 +4,22 @@ import {NextPage} from "next";
 import {useState} from "react";
 import {useRouter} from "next/router";
 
-import {login} from "../utils";
+import {create} from "../utils";
 
-const LoginPage: NextPage = () => {
+const CreatePage: NextPage = () => {
     const router = useRouter();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const onSubmit = async (event: FormEvent) => {
         event.preventDefault();
-        await login(email, password);
+        await create(email, password);
         router.push("/dashboard");
-    };
-
-    const onClick = (event: FormEvent) => {
-        event.preventDefault();
-        router.push("/create");
     };
 
     return (
         <div>
-            <h1>ログイン画面</h1>
+            <h1>アカウント作成画面</h1>
 
             <form onSubmit={onSubmit}>
                 <div>
@@ -36,11 +31,10 @@ const LoginPage: NextPage = () => {
                     <input id="email" value={password} onInput={(e) => setPassword(e.currentTarget.value)} />
                 </div>
 
-                <button type="submit">login</button>
+                <button type="submit">create</button>
             </form>
-            <button type="button" onClick={onClick}>create</button>
         </div>
     );
 };
 
-export default LoginPage;
+export default CreatePage;
